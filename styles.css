@@ -1,0 +1,91 @@
+/* === NAV BAR === */
+
+/* === Accessibility (ADA) button & modal === */
+#ada-button {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 56px; height: 56px; border-radius: 50%; border: none;
+  background-color: var(--primary); /* color applied to mask */
+  -webkit-mask: url("/images/Accessibility.svg") no-repeat center / contain;
+  mask: url("/images/Accessibility.svg") no-repeat center / contain;
+  cursor: pointer;
+  box-shadow: var(--shadow); z-index: 1000; transition: transform .2s ease;
+}
+#ada-button:hover { transform: scale(1.05); }
+#ada-button:focus { outline: 3px solid color-mix(in oklab, var(--text) 30%, transparent); outline-offset: 2px; }
+
+.a11y-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; z-index: 1000; }
+.a11y-backdrop[aria-hidden="false"] { display: block; }
+
+.a11y-modal { position: fixed; right: 20px; bottom: 86px; width: min(92vw, 360px);
+  background: var(--surface); color: var(--text-surface);
+  border:1px solid color-mix(in oklab, var(--text) 12%, transparent);
+  border-radius: 16px; box-shadow: var(--shadow); display:none; z-index: 1001;
+}
+.a11y-modal[aria-hidden="false"] { display:block; }
+.a11y-modal header { display:flex; align-items:center; justify-content: space-between;
+  gap:8px; padding:12px 14px; border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+}
+.a11y-modal header h3 { margin:0; font-size: 18px; }
+.a11y-modal .a11y-body { padding: 12px 14px; display:grid; gap: 12px; }
+.a11y-row { display:flex; align-items:center; justify-content: space-between; gap: 12px; }
+.a11y-row label { font-weight: 700; }
+.a11y-actions { display:flex; gap:8px; justify-content:flex-end; padding: 12px 14px;
+  border-top:1px solid color-mix(in oklab, var(--text) 10%, transparent);
+}
+
+/* Switch */
+.a11y-switch { position: relative; width: 44px; height: 24px; display:inline-block; }
+.a11y-switch input { position:absolute; inset:0; opacity:0; }
+.a11y-switch span { position:absolute; inset:0; border-radius:999px;
+  background: color-mix(in oklab, var(--text) 15%, transparent); transition: background .2s ease;
+}
+.a11y-switch span::after { content:""; position:absolute; top:2px; left:2px; width:20px; height:20px;
+  border-radius:50%; background:#fff; transition: transform .2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+.a11y-switch input:checked + span { background: var(--primary); }
+.a11y-switch input:checked + span::after { transform: translateX(20px); }
+
+/* Buttons inside modal */
+.a11y-btn { padding: 8px 12px; border-radius: 10px; border:1px solid color-mix(in oklab, var(--text) 15%, transparent); background: var(--surface); cursor:pointer; }
+.a11y-btn.primary { background: linear-gradient(135deg, var(--primary), var(--accent)); border:none; color:#fff; }
+
+/* High contrast / underline modes */
+body.a11y-contrast {
+  --bg: #000; --surface: #111; --text: #fff; --text-surface: #fff; --muted: #cccccc;
+  --primary: #00c2ff; --accent: #00ff88; --shadow: 0 0 0 rgba(0,0,0,0.0);
+}
+body.a11y-underline a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* Better focus outline globally */
+:focus-visible { outline: 3px solid color-mix(in oklab, var(--primary) 60%, black); outline-offset: 2px; }
+
+/* ACCESSIBILITY MODAL */
+.footer-inner a.accessibility-link { text-decoration: underline; font-weight: 600; }
+.footer-inner a.accessibility-link:focus { outline: 3px solid color-mix(in oklab, var(--primary) 60%, black); outline-offset: 2px; border-radius: 4px; }
+
+[hidden] { display: none !important; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 100; padding: 20px; }
+.modal { width: min(720px, 100%); background: var(--surface); color: var(--text-surface); border-radius: var(--radius); box-shadow: var(--shadow); border:1px solid color-mix(in oklab, var(--text) 12%, transparent); }
+.modal header { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px; border-bottom:1px solid color-mix(in oklab, var(--text) 12%, transparent); }
+.modal header h2 { margin:0; font-size: 20px; }
+.modal .modal-body { padding:16px; max-height: 60vh; overflow:auto; }
+.modal .modal-actions { display:flex; justify-content:flex-end; gap:12px; padding:16px; border-top:1px solid color-mix(in oklab, var(--text) 12%, transparent); }
+.modal button { padding:10px 14px; border-radius:10px; border:1px solid color-mix(in oklab, var(--text) 15%, transparent); background: var(--surface); cursor:pointer; }
+.modal button.primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color:white; border:none; }
+.modal [data-close] { background: transparent; }
+.sr-only { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* ===== Social Media Icons ===== */
+.social-icons a,
+.footer-social a {
+  color: #000;   /* white icons */
+  margin: 0 8px;
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover,
+.footer-social a:hover {
+  color: var(--accent); /* your brand accent color */
+}
